@@ -1,0 +1,46 @@
+<div class="post-car-dialog-container">
+  <div class="title-container">
+    <h1 mat-dialog-title class="dialog-title">Add a Car</h1>
+  </div>
+  <div mat-dialog-content>
+    <div class="form-container">
+      <div class="input-container">
+      <h2 mat-dialog-title>
+          Add a car to:
+      </h2>
+        <mat-form-field>
+          <mat-label>Dealer ID</mat-label>
+          <input matInput placeholder="1" name="dealerEdit" required>
+        </mat-form-field>
+        <h2 mat-dialog-title>
+          Add a new Record:
+        </h2>
+        <mat-form-field>
+          <mat-label>Car Plate</mat-label>
+          <input matInput type="text" name="carPlateEdit" placeholder="AA000AA" required>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Model</mat-label>
+          <input matInput placeholder="Ferrari" name="brandEdit">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Max Speed</mat-label>
+          <input matInput placeholder="350" name="maxSpeedEdit">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Displacement</mat-label>
+          <input matInput placeholder="cc" name="displacementEdit">
+        </mat-form-field>
+      </div>
+    </div>
+    <div mat-dialog-actions class="buttons-container" align="end">
+      <span class="button-padding">
+        <button mat-raised-button mat-dialog-close color="warn">Go Back</button>
+      </span>
+      <span class="button-padding">
+        <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary" (click)="onAdd()">Add</button>
+      </span>
+    </div>
+  </div>
+</div>
+
