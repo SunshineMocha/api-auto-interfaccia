@@ -5,7 +5,8 @@ import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { ConnectionService } from 'src/app/services/connection.service';
-import { ICar } from 'src/app/models/dealer';
+import { Car, ICar } from 'src/app/models/dealer';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-car',
@@ -22,29 +23,24 @@ import { ICar } from 'src/app/models/dealer';
 })
 export class PostCarComponent implements OnInit{
 
-  @Input() carObj!: ICar;
+  @Input() carObj : ICar = new Car();
   @Input() dealerID!: number;
 
-  @Output() carObjChange: EventEmitter<ICar> = new EventEmitter<ICar>();
-  @Output() dealerIDChange: EventEmitter<number> = new EventEmitter<number>();
-  @Output() onAddClick: EventEmitter<any> = new EventEmitter();
+  @Output() onAddClick: EventEmitter<{ dealerId: number, carObj: ICar }> = new EventEmitter();
+  @Output() onNoClick: EventEmitter<any> = new EventEmitter();
 
-  constructor(public connServ: ConnectionService){}
+  constructor(){}
 
   ngOnInit(): void {
   }
 
+  // When NO gets clicked, the result returned to the home.component is FALSE
+  onNo(): void {
+    this.onNoClick.emit()
+  }
+
   onAdd(){
-    this.onAddClick.emit();
-  }
-
-  updateCarPlate(value: string) {
-    this.carObj.carPlate = value;
-    this.carObjChange.emit(this.carObj);
-  }
-
-  updateDealerId(value:number){
-    this.dealerIDChange.emit(value);
+    this.onAddClick.emit({ dealerId: this.dealerID, carObj: this.carObj });
   }
 
 }

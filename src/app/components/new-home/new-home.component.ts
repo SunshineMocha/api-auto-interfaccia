@@ -55,6 +55,7 @@ export class NewHomeComponent implements OnInit{
   getDealers(): void {
     this.connServ.getDealers().subscribe(data => {
       this.dealer = data;
+      (this.dataSource = new MatTableDataSource(this.dealer))
     });
   }
 
@@ -91,20 +92,18 @@ export class NewHomeComponent implements OnInit{
   openPostCarDialog(){
     //Dialog Creation
     const dialogRef = this.dialog.open(PostCarComponent, {
-      width: '1000px',
+      width: '1000px'
     });
-    // When dialog is closed, check the result and, if true, launch the DELETE method
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // NUOVO CODICE 25/7
-        this.connServ.postCar(this.dealerID, this.carCombo).subscribe(() =>{
-          this.getDealers()
-        });
-        // FINE NUOVO CODICE
+    // Event management
+    dialogRef.componentInstance.onAddClick.subscribe(res => {
+      this.connServ.postCar(res.dealerId, res.carObj).subscribe(() =>{
+        this.getDealers();
+        dialogRef.close();
       }
-      else {
-        console.log('You decided to not add anything');
-      }
+    )});
+    dialogRef.componentInstance.onNoClick.subscribe(() => {
+      console.log('You decided to not add anything');
+      dialogRef.close();
     });
   }
 
@@ -131,22 +130,30 @@ export class NewHomeComponent implements OnInit{
 
   // PUT (CAR)
   onEditCar(car: ICar){
-    console.log('Clicked car', car);
-    this.openEditCarDialog(car.carPlate!);
+    this.openEditCarDialog(car);
   }
 
-  openEditCarDialog(carPlate: string){
+  openEditCarDialog(car: ICar){
   //Dialog Creation
     const dialogRef = this.dialog.open(PutCarDialogComponent, {
       width: '1000px',
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-      }
-      else {
-        console.log('You decided to not change anything');
-      }
+    // Event management
+    dialogRef.componentInstance.carObj = new Car({
+      carPlate: car.carPlate,
+      displacement: car.displacement,
+      maxSpeed: car.maxSpeed,
+      model: car.model
+    });
+    dialogRef.componentInstance.onEditClick.subscribe(res =>{
+      this.connServ.putCar(res.carObj.carPlate!, res.carObj).subscribe(() =>{
+        this.getDealers();
+        dialogRef.close();
+      })
+    });
+    dialogRef.componentInstance.onNoClick.subscribe(() => {
+      console.log('You decided to not edit anything');
+      dialogRef.close();
     });
   }
 
@@ -154,7 +161,6 @@ export class NewHomeComponent implements OnInit{
   onDelete(car: ICar) {
     console.log('Clicked car', car);
     this.openDeleteDialog(car.carPlate!);
-    //this.getDealers();
   }
 
   openDeleteDialog(carPlate: string): void {      // Gets the CarPlate attribute as parameter
@@ -169,14 +175,7 @@ export class NewHomeComponent implements OnInit{
       if (result) {
         this.connServ.deleteCar(carPlate).subscribe(() => {
           console.log('Car deleted');
-          this.connServ.getDealers().subscribe({
-            next: (data: IDealer[]) => (
-              (this.dealer = data),
-              console.log(data),
-              (this.dataSource = new MatTableDataSource(this.dealer))
-            ),
-            error: (err: any) => console.log(err),
-          });
+          this.getDealers();
         },
         error => {
           console.error('Error deleting car', error);
