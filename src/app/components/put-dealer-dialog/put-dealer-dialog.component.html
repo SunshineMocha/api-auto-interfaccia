@@ -1,36 +1,26 @@
 <div class="edit-dealer-dialog-container">
   <div class="title-container">
-    <h1 mat-dialog-title class="dialog-title">Edit a Car</h1>
+    <h1 mat-dialog-title class="dialog-title">Edit a Car Dealer</h1>
   </div>
   <div mat-dialog-content>
     <div class="form-container">
       <div class="input-container">
-        <h2 mat-dialog-title>
-          Dealer to Edit:
-        </h2>
         <mat-form-field>
           <mat-label>ID</mat-label>
-          <input matInput type="text" name="IdEdit" placeholder="1">
-        </mat-form-field>
-        <h2 mat-dialog-title>
-          Edited Record:
-        </h2>
-        <mat-form-field>
-          <mat-label>ID</mat-label>
-          <input matInput type="text" name="IdEdit" placeholder="1">
+          <input matInput [(ngModel)]="dealerObj.dealerID" type="text" name="IdEdit" placeholder="1" disabled required>
         </mat-form-field>
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput type="text" name="NameEdit" placeholder="1">
+          <input matInput [(ngModel)]="dealerObj.dealerName" type="text" name="NameEdit" placeholder="New Name">
         </mat-form-field>
       </div>
     </div>
     <div mat-dialog-actions class="buttons-container" align="end">
       <span class="button-padding">
-        <button mat-raised-button mat-dialog-close color="warn">Go Back</button>
+        <button mat-raised-button mat-dialog-close color="warn" (click)="onNo()">Go Back</button>
       </span>
       <span class="button-padding">
-        <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary">Edit</button>
+        <button mat-raised-button mat-dialog-close cdkFocusInitial color="primary" (click)="onEdit()">Edit</button>
       </span>
     </div>
   </div>

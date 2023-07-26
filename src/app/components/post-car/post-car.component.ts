@@ -4,9 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { ConnectionService } from 'src/app/services/connection.service';
 import { Car, ICar } from 'src/app/models/dealer';
-import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-post-car',

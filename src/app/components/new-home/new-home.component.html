@@ -25,8 +25,8 @@
 </div>
 
 
-<!-- TABLE -->
-<table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+<!-- TABLE FUNZIONANTE -->
+<!-- <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
   <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</th>
     <td mat-cell *matCellDef="let element">{{element[column]}}</td>
@@ -68,26 +68,12 @@
     [class.example-element-row]="element.carList?.length" [class.example-expanded-row]="expandedElement === element"
     (click)="toggleRow(element)"></tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table>
+</table> -->
 
-
-<!-- TABLE CON BOTTONI SU DEALER-->
-<!-- <table mat-table [dataSource]="dataSource" multiTemplateDataRows>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows>
   <ng-container matColumnDef="{{column}}" *ngFor="let column of displayedColumns">
     <th mat-header-cell *matHeaderCellDef mat-sort-header>{{column}}</th>
     <td mat-cell *matCellDef="let element">{{element[column]}}</td>
-  </ng-container>
-
-  <ng-container matColumnDef="edit">
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="primary">Edit</button>
-    </td>
-  </ng-container>
-
-  <ng-container matColumnDef="delete">
-    <td mat-cell *matCellDef="let element">
-      <button mat-raised-button color="warn">Delete</button>
-    </td>
   </ng-container>
 
   <ng-container matColumnDef="expandedDetail">
@@ -103,13 +89,13 @@
 
             <ng-container matColumnDef="edit">
               <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="primary">Edit</button>
+                <button mat-raised-button color="primary" (click)="onEditCar(element)">Edit</button>
               </td>
             </ng-container>
 
             <ng-container matColumnDef="delete">
               <td mat-cell *matCellDef="let element">
-                <button mat-raised-button color="warn">Delete</button>
+                <button mat-raised-button color="warn" (click)="onDelete(element)">Delete</button>
               </td>
             </ng-container>
 
@@ -121,9 +107,15 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="edit">
+    <td mat-cell *matCellDef="let element">
+      <button mat-raised-button color="primary" (click)="onEditDealer(element)">Edit</button>
+    </td>
+  </ng-container>
+
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let element; columns: displayedDisplayColumns;"
     [class.example-element-row]="element.carList?.length" [class.example-expanded-row]="expandedElement === element"
     (click)="toggleRow(element)"></tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
-</table> -->
+</table>

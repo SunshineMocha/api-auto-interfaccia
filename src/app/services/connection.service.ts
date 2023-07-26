@@ -24,7 +24,12 @@ export class ConnectionService {
     return this.http.get<Dealer[]>(`${this.BASE_URL}/${dealerID}`);
   }
 
-  // Creating a car dealer with one (or more) cars
+  // // Creating a car dealer with one (or more) cars
+  // postDealer(newDealer: IDealer){
+  //   return this.http.post(`${this.BASE_URL}`, newDealer);
+  // }
+
+  // Creating a car dealer with no cars
   postDealer(newDealer: IDealer){
     return this.http.post(`${this.BASE_URL}`, newDealer);
   }
@@ -36,7 +41,7 @@ export class ConnectionService {
 
   // Updating car dealer ID and name
   putDealer(dealerID: number, updatedDealer: IDealer){
-    return this.http.put(`${this.BASE_URL}/${dealerID}`, updatedDealer)
+    return this.http.put(`${this.BASE_URL}?id=${dealerID}`, updatedDealer)
   }
 
   // Update of a single car object
