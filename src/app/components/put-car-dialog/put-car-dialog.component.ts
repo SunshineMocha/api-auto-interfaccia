@@ -32,7 +32,6 @@ export class PutCarDialogComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  // When NO gets clicked, the result returned to the home.component is FALSE
   onNo(): void {
     this.onNoClick.emit()
   }

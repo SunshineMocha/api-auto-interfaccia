@@ -32,7 +32,6 @@ export class PostCarComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  // When NO gets clicked, the result returned to the home.component is FALSE
   onNo(): void {
     this.onNoClick.emit()
   }
@@ -40,5 +39,4 @@ export class PostCarComponent implements OnInit{
   onAdd(){
     this.onAddClick.emit({ dealerId: this.dealerID, carObj: this.carObj });
   }
-
 }

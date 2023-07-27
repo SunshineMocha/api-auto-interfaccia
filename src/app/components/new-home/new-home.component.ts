@@ -32,9 +32,6 @@ export class NewHomeComponent implements OnInit{
   expandedElement!: IDealer | null;
   dataSource!: any;
   dealer: IDealer[] = [];
-
-  cars: Car[] = [];
-  carCombo: ICar = new Car();
   dealerID!: number;
 
   constructor(public connServ: ConnectionService, public cd: ChangeDetectorRef, public dialog: MatDialog) {}
@@ -50,6 +47,7 @@ export class NewHomeComponent implements OnInit{
     });
   }
 
+  // GET DEALERS
   getDealers(): void {
     this.connServ.getDealers().subscribe(data => {
       this.dealer = data;
@@ -57,6 +55,7 @@ export class NewHomeComponent implements OnInit{
     });
   }
 
+  // TABLE ANIMATION
   toggleRow(element: IDealer) {
     element.carList && element.carList.length ? (this.expandedElement = this.expandedElement === element ? null : element) : null;
     this.cd.detectChanges();
@@ -68,11 +67,9 @@ export class NewHomeComponent implements OnInit{
   }
 
   openPostDealerDialog(){
-    //Dialog Creation
     const dialogRef = this.dialog.open(PostDealerComponent, {
       width: '1000px',
     });
-
     dialogRef.componentInstance.onAddClick.subscribe(res => {
       let newDealer = {dealerID: res.dealerId, dealerName: res.dealerName, carList:[]}
       this.connServ.postDealer(newDealer).subscribe(() =>{
@@ -92,11 +89,9 @@ export class NewHomeComponent implements OnInit{
   }
 
   openPostCarDialog(){
-    //Dialog Creation
     const dialogRef = this.dialog.open(PostCarComponent, {
       width: '1000px'
     });
-    // Event management
     dialogRef.componentInstance.onAddClick.subscribe(res => {
       this.connServ.postCar(res.dealerId, res.carObj).subscribe(() =>{
         this.getDealers();
@@ -115,19 +110,15 @@ export class NewHomeComponent implements OnInit{
   }
 
   openEditDealerDialog(dealer: IDealer){
-    //Dialog Creation
     const dialogRef = this.dialog.open(PutDealerDialogComponent, {
       width: '1000px',
     });
-    // Event management
     dialogRef.componentInstance.dealerObj = new Dealer({
       dealerID: dealer.dealerID,
       dealerName: dealer.dealerName,
       carList: dealer.carList
     });
     dialogRef.componentInstance.onEditClick.subscribe(res =>{
-      console.log(res.dealerObj);
-      //dialogRef.close();
       this.connServ.putDealer(res.dealerObj.dealerID!, res.dealerObj).subscribe(() =>{
         this.getDealers();
         dialogRef.close();
@@ -145,11 +136,9 @@ export class NewHomeComponent implements OnInit{
   }
 
   openEditCarDialog(car: ICar){
-  //Dialog Creation
     const dialogRef = this.dialog.open(PutCarDialogComponent, {
       width: '1000px',
     });
-    // Event management
     dialogRef.componentInstance.carObj = new Car({
       carPlate: car.carPlate,
       model: car.model,
@@ -174,14 +163,11 @@ export class NewHomeComponent implements OnInit{
     this.openDeleteDialog(car.carPlate!);
   }
 
-  openDeleteDialog(carPlate: string): void {      // Gets the CarPlate attribute as parameter
-    //Dialog Creation
+  openDeleteDialog(carPlate: string): void {
     const dialogRef = this.dialog.open(DeleteDialogComponent, {
       width: '300px',
-      data: { carPlate: carPlate }
+      data: {carPlate: carPlate}
     });
-
-    // When dialog is closed, check the result and, if true, launch the DELETE method
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         this.connServ.deleteCar(carPlate).subscribe(() => {

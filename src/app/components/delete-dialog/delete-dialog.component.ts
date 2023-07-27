@@ -16,17 +16,11 @@ export class DeleteDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<DeleteDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: any, public connServ: ConnectionService) {}
 
-  // When NO gets clicked, the result returned to the home.component is FALSE
   onNoClick(): void {
     this.dialogRef.close(false);
   }
 
-  // When YES gets clicked, the result returned to the home.component is TRUE
   onYesClick(): void {
-    this.connServ.deleteCar(this.data.carPlate).subscribe(() => {
-      this.dialogRef.close(true);
-    }, error => {
-      this.dialogRef.close(false);
-    });
+    this.dialogRef.close(true);
   }
 }

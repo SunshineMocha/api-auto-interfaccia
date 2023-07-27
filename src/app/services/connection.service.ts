@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -23,11 +22,6 @@ export class ConnectionService {
   getDealersById(dealerID: number){
     return this.http.get<Dealer[]>(`${this.BASE_URL}/${dealerID}`);
   }
-
-  // // Creating a car dealer with one (or more) cars
-  // postDealer(newDealer: IDealer){
-  //   return this.http.post(`${this.BASE_URL}`, newDealer);
-  // }
 
   // Creating a car dealer with no cars
   postDealer(newDealer: IDealer){

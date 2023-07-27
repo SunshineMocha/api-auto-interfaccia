@@ -21,7 +21,6 @@ import { IDealer, Dealer, ICar, Car } from 'src/app/models/dealer';
 })
 export class PutDealerDialogComponent implements OnInit{
 
-
   @Input() dealerObj: IDealer = new Dealer();
   carObj: ICar = new Car();
 
@@ -33,7 +32,6 @@ export class PutDealerDialogComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  // When NO gets clicked, the result returned to the home.component is FALSE
   onNo(): void {
     this.onNoClick.emit()
   }
