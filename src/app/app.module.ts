@@ -17,6 +17,9 @@ import { PutCarDialogComponent } from './components/put-car-dialog/put-car-dialo
 import { DeleteDialogComponent } from './components/delete-dialog/delete-dialog.component';
 import { NewHomeComponent } from './components/new-home/new-home.component';
 
+import { TableModule } from 'primeng/table';
+import { InplaceModule } from 'primeng/inplace';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +40,9 @@ import { NewHomeComponent } from './components/new-home/new-home.component';
     PostCarComponent,
     PutDealerDialogComponent,
     PutCarDialogComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    TableModule,
+    InplaceModule
   ],
   providers: [],
   bootstrap: [AppComponent]
