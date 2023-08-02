@@ -3,18 +3,6 @@
   justify-content: center;
 }
 
-// .table-container{
-//   width: 100%;
-// }
-
-// mat-header-cell{
-//   justify-content: center;
-// }
-
-// mat-cell{
-//   justify-content: center;
-// }
-
 .buttons-container{
   display: flex;
   justify-content: space-evenly;
@@ -22,43 +10,49 @@
 }
 
 
-// OLD TABLE
-
-
+// OLD TABLE CSS
+// .table-container{
+//   width: 100%;
+// }
+// mat-header-cell{
+//   justify-content: center;
+// }
+// mat-cell{
+//   justify-content: center;
+// }
 // table{
 //   width: 100%;
 //   table-layout: fixed;
 // }
-
 // tr.example-detail-row {
 //   height: 0;
 // }
-
 // tr.example-element-row:not(.example-expanded-row):hover {
 //   background: hsla(231, 48%, 48%, 0.5);
 // }
-
 // tr.example-element-row:not(.example-expanded-row):active {
 //   background: hsla(231, 100%, 48%, 0.5);
 // }
-
 // .example-element-row td {
 //   border-bottom-width: 0;
 // }
-
 // .example-element-detail {
 //   overflow: hidden;
 //   display: flex;
 // }
-
 // table th,td,tr{
 //   border-bottom-style:none;
 //   text-align: center;
 // }
-
 // .inner-table {
 //   width: 100%;
 // }
+// OLD TABLE CSS END
 
+p-table th{
+  text-align: center;
+}
 
-// OLD TABLE FINE COMMENTO
+p-table td{
+  text-align: center;
+}
